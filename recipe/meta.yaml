@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/tabloo-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/tabloo-{{ version }}.tar.gz
   sha256: 7029e21a62b4fc398468a9cdbfa26b8ac8176d87507b20b78dacdf379b2bc5d4
 
 build:
@@ -14,17 +14,17 @@ build:
     - tabloo_cli = tabloo.tabloo_cli:main
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.7
+    - python {{ python_min }}
     - setuptools
     - wheel
     - pytest-runner
     - pip
   run:
-    - python >=3.7
+    - python >={{ python_min }}
     - flask >=2
     - flask-cors
     - pandas >=1.2.0
@@ -37,6 +37,7 @@ test:
     - tabloo_cli --help
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/bluenote10/tabloo
