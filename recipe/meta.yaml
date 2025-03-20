@@ -1,5 +1,6 @@
 {% set name = "tabloo" %}
 {% set version = "0.1.0" %}
+{% set python_min = "3.7" %}
 
 package:
   name: {{ name|lower }}
@@ -35,9 +36,14 @@ test:
   commands:
     - pip check
     - tabloo_cli --help
+    - python -m pytest src_backend_python/tests
+  source_files:
+    - .
   requires:
     - pip
     - python {{ python_min }}
+    - pytest
+    - pytest-cov
 
 about:
   home: https://github.com/bluenote10/tabloo
